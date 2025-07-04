@@ -10,3 +10,5 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/build/Release)
 
 add_subdirectory(Solid)
 add_subdirectory(Sandbox)
+
+add_subdirectory(vendor/spdlog)
