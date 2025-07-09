@@ -3,7 +3,7 @@
 
 #include "Event.hpp"
 
-namespace Solid::Events {
+namespace Solid::Event {
 
 class WindowCloseEvent : public Event {
 public:
@@ -12,6 +12,8 @@ public:
     int getCategoryFlags() const override { return EventCategory::Application; }
 
     EventType getType() const override { return EventType::WindowClose; }
+
+    static EventType getStaticType() { return EventType::WindowClose; }
 };
 
 class WindowResizeEvent : public Event {
@@ -29,6 +31,8 @@ public:
     unsigned int getWidth() const { return width_; }
     unsigned int getHeight() const { return height_; }
 
+    static EventType getStaticType() { return EventType::WindowResize; }
+
 private:
     unsigned int width_;
     unsigned int height_;
@@ -41,6 +45,8 @@ public:
     int getCategoryFlags() const override { return EventCategory::Application; }
 
     EventType getType() const override { return EventType::WindowFocus; }
+
+    static EventType getStaticType() { return EventType::WindowFocus; }
 };
 
 class WindowLostFocusEvent : public Event {
@@ -50,6 +56,8 @@ public:
     int getCategoryFlags() const override { return EventCategory::Application; }
 
     EventType getType() const override { return EventType::WindowLostFocus; }
+
+    static EventType getStaticType() { return EventType::WindowLostFocus; }
 };
 
 class AppTickEvent : public Event {
@@ -59,6 +67,8 @@ public:
     int getCategoryFlags() const override { return EventCategory::Application; }
 
     EventType getType() const override { return EventType::AppTick; }
+
+    static EventType getStaticType() { return EventType::AppTick; }
 };
 
 class AppUpdateEvent : public Event {
@@ -68,6 +78,8 @@ public:
     int getCategoryFlags() const override { return EventCategory::Application; }
 
     EventType getType() const override { return EventType::AppUpdate; }
+
+    static EventType getStaticType() { return EventType::AppUpdate; }
 };
 
 class AppRenderEvent : public Event {
@@ -77,6 +89,8 @@ public:
     int getCategoryFlags() const override { return EventCategory::Application; }
 
     EventType getType() const override { return EventType::AppRender; }
+
+    static EventType getStaticType() { return EventType::AppRender; }
 };
 
 }

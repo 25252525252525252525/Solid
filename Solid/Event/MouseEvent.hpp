@@ -4,7 +4,7 @@
 #include "Event.hpp"
 #include "MouseCode.hpp"
 
-namespace Solid::Events {
+namespace Solid::Event {
 
 class MouseButtonEvent : public Event {
 public:
@@ -30,6 +30,8 @@ public:
     }
 
     EventType getType() const override { return EventType::MouseButtonPressed; }
+
+    static EventType getStaticType() { return EventType::MouseButtonPressed; }
 };
 
 class MouseButtonReleasedEvent : public MouseButtonEvent {
@@ -40,6 +42,8 @@ public:
     }
 
     EventType getType() const override { return EventType::MouseButtonReleased; }
+
+    static EventType getStaticType() { return EventType::MouseButtonReleased; }
 };
 
 class MouseMovedEvent : public Event {
@@ -56,6 +60,8 @@ public:
 
     int getX() const { return x_; }
     int getY() const { return y_; }
+
+    static EventType getStaticType() { return EventType::MouseMoved; }
 
 private:
     int x_;
@@ -76,6 +82,8 @@ public:
 
     float getXOffset() const { return xOffset_; }
     float getYOffset() const { return yOffset_; }
+
+    static EventType getStaticType() { return EventType::MouseScrolled; }
 
 private:
     float xOffset_;

@@ -4,7 +4,7 @@
 #include "Event.hpp"
 #include "KeyCode.hpp"
 
-namespace Solid::Events {
+namespace Solid::Event {
 
 class KeyEvent : public Event {
 public:
@@ -33,6 +33,8 @@ public:
 
     EventType getType() const override { return EventType::KeyPressed; }
 
+    static EventType getStaticType() { return EventType::KeyPressed; }
+
 private:
     bool isRepeated_;
 };
@@ -45,6 +47,8 @@ public:
     }
 
     EventType getType() const override { return EventType::KeyReleased; }
+
+    static EventType getStaticType() { return EventType::KeyReleased; }
 };
 
 class KeyTypedEvent : public KeyEvent {
@@ -55,6 +59,8 @@ public:
     }
 
     EventType getType() const override { return EventType::KeyTyped; }
+
+    static EventType getStaticType() { return EventType::KeyTyped; }
 };
 
 }
