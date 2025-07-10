@@ -14,3 +14,4 @@ add_subdirectory(Solid)
 add_subdirectory(Sandbox)
 
 add_subdirectory(vendor/spdlog vendor/spdlog_build)
+add_subdirectory(vendor/glfw)
