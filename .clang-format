@@ -1,3 +1,5 @@
 BasedOnStyle: WebKit
 ColumnLimit: 100
 AlwaysBreakTemplateDeclarations: Yes
+AllowShortFunctionsOnASingleLine: None
+SortIncludes: false
