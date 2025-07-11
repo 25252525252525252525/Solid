@@ -2,9 +2,11 @@
 #include "AbstractWindow.hpp"
 #include "Log.hpp"
 
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <memory>
+#include <stdexcept>
 
 namespace Solid::Platform::Linux {
 
@@ -37,11 +39,17 @@ void Window::init(const WindowProps& windowProps)
 
     if (window_ == nullptr) {
         SOLID_CORE_ERROR("Failed to create the window.");
-        return;
+        throw std::runtime_error("Window creation failed.");
     }
 
     windowCount_++;
     glfwMakeContextCurrent(window_);
+
+    auto status = gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress));
+    if (!status) {
+        SOLID_CORE_ERROR("Failed to initialize GLAD.");
+        throw std::runtime_error("OpenGL initialization failed.");
+    }
 }
 
 Window::~Window()
