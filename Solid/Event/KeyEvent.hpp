@@ -4,13 +4,20 @@
 #include "Event.hpp"
 #include "KeyCode.hpp"
 
+#include <sstream>
 namespace Solid::Event {
 
 class KeyEvent : public Event {
 public:
-    int getCategoryFlags() const override { return EventCategory::Keyboard | EventCategory::Input; }
+    int getCategoryFlags() const override
+    {
+        return EventCategory::Keyboard | EventCategory::Input;
+    }
 
-    KeyCode getKeyCode() const { return keyCode_; }
+    KeyCode getKeyCode() const
+    {
+        return keyCode_;
+    }
 
 protected:
     KeyEvent(KeyCode keyCode)
@@ -29,11 +36,32 @@ public:
     {
     }
 
-    bool isRepeated() const { return isRepeated_; }
+    bool isRepeated() const
+    {
+        return isRepeated_;
+    }
 
-    EventType getType() const override { return EventType::KeyPressed; }
+    EventType getType() const override
+    {
+        return EventType::KeyPressed;
+    }
 
-    static EventType getStaticType() { return EventType::KeyPressed; }
+    std::string getName() const override
+    {
+        return "KeyPressedEvent";
+    }
+
+    std::string toString() const override
+    {
+        std::stringstream ss;
+        ss << "KeyPressedEvent: " << keyCode_;
+        return ss.str();
+    }
+
+    static EventType getStaticType()
+    {
+        return EventType::KeyPressed;
+    }
 
 private:
     bool isRepeated_;
@@ -46,9 +74,27 @@ public:
     {
     }
 
-    EventType getType() const override { return EventType::KeyReleased; }
+    EventType getType() const override
+    {
+        return EventType::KeyReleased;
+    }
 
-    static EventType getStaticType() { return EventType::KeyReleased; }
+    std::string getName() const override
+    {
+        return "KeyReleasedEvent";
+    }
+
+    std::string toString() const override
+    {
+        std::stringstream ss;
+        ss << "KeyReleasedEvent: " << keyCode_;
+        return ss.str();
+    }
+
+    static EventType getStaticType()
+    {
+        return EventType::KeyReleased;
+    }
 };
 
 class KeyTypedEvent : public KeyEvent {
@@ -58,9 +104,27 @@ public:
     {
     }
 
-    EventType getType() const override { return EventType::KeyTyped; }
+    EventType getType() const override
+    {
+        return EventType::KeyTyped;
+    }
 
-    static EventType getStaticType() { return EventType::KeyTyped; }
+    std::string getName() const override
+    {
+        return "KeyTypedEvent";
+    }
+
+    std::string toString() const override
+    {
+        std::stringstream ss;
+        ss << "KeyTypedEvent: " << keyCode_;
+        return ss.str();
+    }
+
+    static EventType getStaticType()
+    {
+        return EventType::KeyTyped;
+    }
 };
 
 }

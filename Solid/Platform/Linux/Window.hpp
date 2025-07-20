@@ -18,15 +18,18 @@ public:
     void onUpdate() override;
     int getHeight() const override;
     int getWidth() const override;
+    void setEventCallbackFunction(const EventCallbackFunction& eventCallbackFunction) override;
 
 private:
     void init(const WindowProps& windowProps);
     void shutdown();
+    void setGlfwCallbacks();
 
     struct WindowData {
         std::string title;
-        int height;
         int width;
+        int height;
+        EventCallbackFunction eventCallbackFunction;
     };
 
     WindowData windowData_;

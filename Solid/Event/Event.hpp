@@ -1,6 +1,7 @@
 #ifndef SOLID_EVENT_EVENT_HPP
 #define SOLID_EVENT_EVENT_HPP
 
+#include <string>
 namespace Solid::Event {
 
 enum EventCategory {
@@ -33,11 +34,18 @@ enum class EventType {
 
 class Event {
 public:
+    Event() = default;
     virtual ~Event() = default;
     virtual int getCategoryFlags() const = 0;
     virtual EventType getType() const = 0;
+    virtual std::string getName() const = 0;
 
-    bool isHandled = false;
+    virtual std::string toString() const
+    {
+        return getName();
+    }
+
+    bool isHandled_ = false;
 };
 
 }

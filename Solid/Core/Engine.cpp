@@ -5,7 +5,7 @@ namespace Solid {
 void Engine::run(ApplicationFactory factory)
 {
     auto app = factory();
-    while (true) {
+    while (app->isRunning()) {
         app->run();
     }
 }

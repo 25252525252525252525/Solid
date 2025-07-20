@@ -4,6 +4,7 @@
 #include "Event.hpp"
 #include "MouseCode.hpp"
 
+#include <sstream>
 namespace Solid::Event {
 
 class MouseButtonEvent : public Event {
@@ -29,9 +30,27 @@ public:
     {
     }
 
-    EventType getType() const override { return EventType::MouseButtonPressed; }
+    EventType getType() const override
+    {
+        return EventType::MouseButtonPressed;
+    }
 
-    static EventType getStaticType() { return EventType::MouseButtonPressed; }
+    std::string getName() const override
+    {
+        return "MouseButtonPressedEvent";
+    }
+
+    std::string toString() const override
+    {
+        std::stringstream ss;
+        ss << "MouseButtonPressedEvent: " << mouseCode_;
+        return ss.str();
+    }
+
+    static EventType getStaticType()
+    {
+        return EventType::MouseButtonPressed;
+    }
 };
 
 class MouseButtonReleasedEvent : public MouseButtonEvent {
@@ -41,53 +60,125 @@ public:
     {
     }
 
-    EventType getType() const override { return EventType::MouseButtonReleased; }
+    EventType getType() const override
+    {
+        return EventType::MouseButtonReleased;
+    }
 
-    static EventType getStaticType() { return EventType::MouseButtonReleased; }
+    std::string getName() const override
+    {
+        return "MouseButtonReleasedEvent";
+    }
+
+    std::string toString() const override
+    {
+        std::stringstream ss;
+        ss << "MouseButtonReleasedEvent: " << mouseCode_;
+        return ss.str();
+    }
+
+    static EventType getStaticType()
+    {
+        return EventType::MouseButtonReleased;
+    }
 };
 
 class MouseMovedEvent : public Event {
 public:
-    MouseMovedEvent(int x, int y)
+    MouseMovedEvent(double x, double y)
         : x_(x)
         , y_(y)
     {
     }
 
-    int getCategoryFlags() const override { return EventCategory::Mouse | EventCategory::Input; }
+    int getCategoryFlags() const override
+    {
+        return EventCategory::Mouse | EventCategory::Input;
+    }
 
-    EventType getType() const override { return EventType::MouseMoved; }
+    EventType getType() const override
+    {
+        return EventType::MouseMoved;
+    }
 
-    int getX() const { return x_; }
-    int getY() const { return y_; }
+    std::string getName() const override
+    {
+        return "MouseMovedEvent";
+    }
 
-    static EventType getStaticType() { return EventType::MouseMoved; }
+    std::string toString() const override
+    {
+        std::stringstream ss;
+        ss << "MouseMovedEvent: " << x_ << " " << y_;
+        return ss.str();
+    }
+
+    double getX() const
+    {
+        return x_;
+    }
+    double getY() const
+    {
+        return y_;
+    }
+
+    static EventType getStaticType()
+    {
+        return EventType::MouseMoved;
+    }
 
 private:
-    int x_;
-    int y_;
+    double x_;
+    double y_;
 };
 
 class MouseScrolledEvent : public Event {
 public:
-    MouseScrolledEvent(float xOffset, float yOffset)
+    MouseScrolledEvent(double xOffset, double yOffset)
         : xOffset_(xOffset)
         , yOffset_(yOffset)
     {
     }
 
-    int getCategoryFlags() const override { return EventCategory::Mouse | EventCategory::Input; }
+    int getCategoryFlags() const override
+    {
+        return EventCategory::Mouse | EventCategory::Input;
+    }
 
-    EventType getType() const override { return EventType::MouseScrolled; }
+    EventType getType() const override
+    {
+        return EventType::MouseScrolled;
+    }
 
-    float getXOffset() const { return xOffset_; }
-    float getYOffset() const { return yOffset_; }
+    std::string getName() const override
+    {
+        return "MouseScrolledEvent";
+    }
 
-    static EventType getStaticType() { return EventType::MouseScrolled; }
+    std::string toString() const override
+    {
+        std::stringstream ss;
+        ss << "MouseScrolledEvent: " << xOffset_ << " " << yOffset_;
+        return ss.str();
+    }
+
+    double getXOffset() const
+    {
+        return xOffset_;
+    }
+    double getYOffset() const
+    {
+        return yOffset_;
+    }
+
+    static EventType getStaticType()
+    {
+        return EventType::MouseScrolled;
+    }
 
 private:
-    float xOffset_;
-    float yOffset_;
+    double xOffset_;
+    double yOffset_;
 };
 
 }

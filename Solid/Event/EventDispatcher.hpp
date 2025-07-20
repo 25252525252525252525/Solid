@@ -15,7 +15,7 @@ public:
     bool dispatch(const F& func)
     {
         if (event_.getType() == T::getStaticType()) {
-            event_.isHandled |= func(static_cast<T&>(event_));
+            event_.isHandled_ |= func(static_cast<T&>(event_));
             return true;
         }
 
