@@ -28,6 +28,10 @@ Application::~Application()
 
 void Application::run()
 {
+    for (const auto& layer : layerStack_) {
+        layer->onUpdate();
+    }
+
     window_->onUpdate();
 }
 
@@ -37,6 +41,14 @@ void Application::onEvent(Event::Event& event)
     Event::EventDispatcher eventDispatcher(event);
     eventDispatcher.dispatch<Event::WindowCloseEvent>(
         SOLID_BIND_EVENT_FUNCTION(Application::onWindowClose));
+
+    for (auto it = layerStack_.rbegin(); it != layerStack_.rend(); ++it) {
+        if (event.isHandled_) {
+            break;
+        }
+
+        (*it)->onEvent(event);
+    }
 }
 
 bool Application::onWindowClose(Event::WindowCloseEvent& event)
@@ -48,6 +60,16 @@ bool Application::onWindowClose(Event::WindowCloseEvent& event)
 bool Application::isRunning() const
 {
     return isRunning_;
+}
+
+void Application::pushLayer(std::shared_ptr<Layer> layer)
+{
+    layerStack_.pushLayer(layer);
+}
+
+void Application::pushOverlay(std::shared_ptr<Layer> layer)
+{
+    layerStack_.pushOverlay(layer);
 }
 
 }
